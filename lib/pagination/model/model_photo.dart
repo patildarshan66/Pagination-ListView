@@ -85,6 +85,28 @@ class ModelPhoto with ChangeNotifier {
             : null,
         user: json["user"] != null ? User.fromJson(json["user"]) : null,
       );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "promoted_at": promotedAt == null ? null : promotedAt.toIso8601String(),
+    "width": width,
+    "height": height,
+    "color": color,
+    "blur_hash": blurHash,
+    "description": description == null ? null : description,
+    "alt_description": altDescription == null ? null : altDescription,
+    "urls": urls.toJson(),
+    "links": links.toJson(),
+    "categories": List<dynamic>.from(categories.map((x) => x)),
+    "likes": likes,
+    "liked_by_user": likedByUser,
+    "current_user_collections": List<dynamic>.from(currentUserCollections.map((x) => x)),
+    "sponsorship": sponsorship == null ? null : sponsorship.toJson(),
+    "topic_submissions": topicSubmissions.toJson(),
+    "user": user.toJson(),
+  };
 }
 
 class ModelPhotoLinks {
@@ -107,6 +129,12 @@ class ModelPhotoLinks {
         download: json["download"],
         downloadLocation: json["download_location"],
       );
+  Map<String, dynamic> toJson() => {
+    "self": self,
+    "html": html,
+    "download": download,
+    "download_location": downloadLocation,
+  };
 }
 
 class Sponsorship {
@@ -129,6 +157,13 @@ class Sponsorship {
         taglineUrl: json["tagline_url"],
         sponsor: json["sponsor"]!=null?User.fromJson(json["sponsor"]):null,
       );
+
+  Map<String, dynamic> toJson() => {
+    "impression_urls": List<dynamic>.from(impressionUrls.map((x) => x)),
+    "tagline": tagline,
+    "tagline_url": taglineUrl,
+    "sponsor": sponsor.toJson(),
+  };
 }
 
 class User {
@@ -197,6 +232,28 @@ class User {
         forHire: json["for_hire"],
         social: json["social"]!=null?Social.fromJson(json["social"]):null,
       );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "updated_at": updatedAt.toIso8601String(),
+    "username": username,
+    "name": name,
+    "first_name": firstName,
+    "last_name": lastName == null ? null : lastName,
+    "twitter_username": twitterUsername == null ? null : twitterUsername,
+    "portfolio_url": portfolioUrl == null ? null : portfolioUrl,
+    "bio": bio == null ? null : bio,
+    "location": location == null ? null : location,
+    "links": links.toJson(),
+    "profile_image": profileImage.toJson(),
+    "instagram_username": instagramUsername == null ? null : instagramUsername,
+    "total_collections": totalCollections,
+    "total_likes": totalLikes,
+    "total_photos": totalPhotos,
+    "accepted_tos": acceptedTos,
+    "for_hire": forHire,
+    "social": social.toJson(),
+  };
 }
 
 class UserLinks {
@@ -227,6 +284,15 @@ class UserLinks {
         following: json["following"],
         followers: json["followers"],
       );
+  Map<String, dynamic> toJson() => {
+    "self": self,
+    "html": html,
+    "photos": photos,
+    "likes": likes,
+    "portfolio": portfolio,
+    "following": following,
+    "followers": followers,
+  };
 }
 
 class ProfileImage {
@@ -245,6 +311,11 @@ class ProfileImage {
         medium: json["medium"],
         large: json["large"],
       );
+  Map<String, dynamic> toJson() => {
+    "small": small,
+    "medium": medium,
+    "large": large,
+  };
 }
 
 class Social {
@@ -266,7 +337,12 @@ class Social {
         twitterUsername: json["twitter_username"],
         paypalEmail: json["paypal_email"],
       );
-
+  Map<String, dynamic> toJson() => {
+    "instagram_username": instagramUsername == null ? null : instagramUsername,
+    "portfolio_url": portfolioUrl == null ? null : portfolioUrl,
+    "twitter_username": twitterUsername == null ? null : twitterUsername,
+    "paypal_email": paypalEmail,
+  };
 }
 
 class TopicSubmissions {
@@ -305,6 +381,14 @@ class TopicSubmissions {
             ? null
             : ArtsCulture.fromJson(json["history"]),
       );
+  Map<String, dynamic> toJson() => {
+    "technology": technology == null ? null : technology.toJson(),
+    "arts-culture": artsCulture == null ? null : artsCulture.toJson(),
+    "film": film == null ? null : film.toJson(),
+    "business-work": businessWork == null ? null : businessWork.toJson(),
+    "textures-patterns": texturesPatterns == null ? null : texturesPatterns.toJson(),
+    "history": history == null ? null : history.toJson(),
+  };
 }
 
 class ArtsCulture {
@@ -317,6 +401,9 @@ class ArtsCulture {
   factory ArtsCulture.fromJson(Map<String, dynamic> json) => ArtsCulture(
         status: json["status"],
       );
+  Map<String, dynamic> toJson() => {
+    "status": status,
+  };
 }
 
 class BusinessWork {
@@ -332,6 +419,10 @@ class BusinessWork {
         status: json["status"],
         approvedOn: json["approved_on"]!=null?DateTime.parse(json["approved_on"]):null,
       );
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "approved_on": approvedOn.toIso8601String(),
+  };
 }
 
 class Urls {
@@ -356,4 +447,12 @@ class Urls {
         small: json["small"],
         thumb: json["thumb"],
       );
+  Map<String, dynamic> toJson() => {
+    "raw": raw,
+    "full": full,
+    "regular": regular,
+    "small": small,
+    "thumb": thumb,
+  };
+
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pagination_list_view/additionalFiles/constants.dart';
 import 'package:pagination_list_view/additionalFiles/global_functions_variables.dart';
 import 'package:pagination_list_view/additionalFiles/routes.dart';
+import 'package:pagination_list_view/authentication/vm/vm_authentication.dart';
 import 'package:pagination_list_view/favoritePhotos/vm/vm_favorite_photos.dart';
 import 'package:pagination_list_view/pagination/view/photo_item.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,17 @@ class FavoritePhotos extends StatefulWidget {
 }
 
 class _FavoritePhotosState extends State<FavoritePhotos> {
-  Future<void> _apiCall() async {}
+  Future<void> _apiCall() async {
+    final userId =Provider.of<VmAuthentication>(context,listen: false).userId;
+   await Provider.of<VmFavoritePhotos>(context,listen: false).getFavoritePhotos(userId);
+  }
+
+  @override
+  void initState() {
+    _apiCall();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

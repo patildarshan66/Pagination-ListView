@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pagination_list_view/additionalFiles/constants.dart';
 import 'package:pagination_list_view/additionalFiles/global_functions_variables.dart';
+import 'package:pagination_list_view/authentication/vm/vm_authentication.dart';
 import 'package:pagination_list_view/favoritePhotos/vm/vm_favorite_photos.dart';
 import 'package:pagination_list_view/pagination/model/model_photo.dart';
 import 'package:provider/provider.dart';
@@ -83,10 +84,11 @@ class PhotoDetailsView extends StatelessWidget {
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            final userId =  Provider.of<VmAuthentication>(context,listen: false).userId;
                             if (isFav) {
-                              vmFav.removeFromFavoritePhotos(photoData.id);
+                              vmFav.removeFromFavoritePhotos(photoData.id,userId);
                             } else {
-                              vmFav.addFavoritePhotos(photoData);
+                              vmFav.addFavoritePhotos(photoData,userId);
                             }
                           },
                           icon: Icon(
